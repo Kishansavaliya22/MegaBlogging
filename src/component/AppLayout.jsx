@@ -1,16 +1,14 @@
 import React, { useState } from "react";
-import { Layout, Menu } from "antd";
-import { useSelector } from "react-redux";
-import { Link, Links } from "react-router";
+import { Button, Layout, Menu } from "antd";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router";
 import { Outlet, useNavigate } from "react-router-dom";
+import appwriteAuth from "../appwrite/appwriteAuth";
+import { storeLogout } from "../store/authSlice";
 
 const { Header, Content, Footer } = Layout;
 const items = [
   [
-    {
-      label: "Home",
-      key: "/",
-    },
     {
       label: "Login",
       key: "/login",
@@ -29,10 +27,6 @@ const items = [
       label: "Edit Blog",
       key: "/editblog",
     },
-    {
-      label: "Logout",
-      key: "/logout",
-    },
   ],
 ];
 
@@ -40,6 +34,7 @@ const AppLayout = () => {
   const [current, setCurrent] = useState();
 
   const authStatus = useSelector((state) => state.authStatus);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const menuHandler = (e) => {
@@ -47,12 +42,30 @@ const AppLayout = () => {
     setCurrent(e.key);
   };
 
+  const logoutHandler = async () => {
+    await appwriteAuth.logout();
+
+    dispatch(storeLogout());
+    navigate("/login");
+  };
+
   return (
     <Layout>
-      <Header>
-        <Link to="/">
-          <img src="" alt="" />
-        </Link>
+      <Header
+        style={{
+          position: "sticky",
+          top: 0,
+          zIndex: 1,
+          width: "100%",
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
+        <div>
+          <Link to="/">
+            <img src="src\assets\logo.jpg" alt="Logo" className="size-8" />
+          </Link>
+        </div>
         <Menu
           theme="dark"
           mode="horizontal"
@@ -61,8 +74,9 @@ const AppLayout = () => {
           items={!authStatus ? items[0] : items[1]}
           style={{ flex: 1, minWidth: 0 }}
         />
+        {authStatus && <Button onClick={logoutHandler}>Logout</Button>}
       </Header>
-      <Content className="h-screen p-1">
+      <Content className="p-3 justify-items-center">
         <Outlet />
       </Content>
       <Footer>

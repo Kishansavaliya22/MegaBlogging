@@ -15,12 +15,12 @@ class appWriteAuth {
 
   async createAccount({ email, password, name }) {
     try {
-      const userData = await this.account.create(
-        ID.unique(),
+      const userData = await this.account.create({
+        userId: ID.unique(),
         email,
         password,
-        name
-      );
+        name,
+      });
       if (userData) {
         return this.login({ email, password });
       } else {
@@ -33,7 +33,7 @@ class appWriteAuth {
 
   async login({ email, password }) {
     try {
-      return await this.account.createEmailPasswordSession(email, password);
+      return await this.account.createEmailPasswordSession({ email, password });
     } catch (error) {
       return { type: "Login Error", Error: error };
     }

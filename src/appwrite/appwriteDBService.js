@@ -19,12 +19,12 @@ class appWriteDB {
 
   async createArticle({ title, slug, content, userid, status, featuredimage }) {
     try {
-      return await this.databases.createDocument(
-        config.appwriteDataBaseID,
-        config.appwriteArticleID,
-        slug,
-        { title, userid, content, status, featuredimage }
-      );
+      return await this.databases.createDocument({
+        databaseID: config.appwriteDataBaseID,
+        collectionId: config.appwriteArticleID,
+        documentId: slug,
+        data: { title, userid, content, status, featuredimage, slug },
+      });
     } catch (error) {
       return { type: "CreateArticle Error", Error: error };
     }
@@ -32,11 +32,11 @@ class appWriteDB {
 
   async listArticles() {
     try {
-      return await this.databases.listDocuments(
-        config.appwriteDataBaseID,
-        config.appwriteArticleID,
-        [Query.equal("status", ["Active"])]
-      );
+      return await this.databases.listDocuments({
+        databaseId: config.appwriteDataBaseID,
+        collectionId: config.appwriteArticleID,
+        queries: [Query.equal("status", ["Active"])],
+      });
     } catch (error) {
       return { type: "ListArticles Error", Error: error };
     }
