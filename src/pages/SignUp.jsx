@@ -29,44 +29,46 @@ const SignUp = () => {
   };
 
   return (
-    <Form
-      name="signup"
-      initialValues={{ remember: true }}
-      style={{ maxWidth: 360 }}
-      onFinish={onFinish}
-      className="rounded-md border p-4"
-    >
-      {error && <p className="mb-1 text-center">error</p>}
-      <Form.Item
-        name="name"
-        rules={[{ required: true, message: "Please input your Name!" }]}
+    <div className="h-134 content-center">
+      <Form
+        name="signup"
+        initialValues={{ remember: true }}
+        style={{ maxWidth: 360 }}
+        onFinish={onFinish}
+        className="rounded-md border p-4"
       >
-        <Input prefix={<UserOutlined />} placeholder="Full Name" />
-      </Form.Item>
-      <Form.Item
-        name="email"
-        rules={[{ required: true, message: "Please input your Email!" }]}
-      >
-        <Input prefix={<MailOutlined />} placeholder="Email" />
-      </Form.Item>
-      <Form.Item
-        name="password"
-        rules={[{ required: true, message: "Please input your Password!" }]}
-      >
-        <Input
-          prefix={<LockOutlined />}
-          type="password"
-          placeholder="Password"
-        />
-      </Form.Item>
+        {error && <p className="mb-1 text-center">error</p>}
+        <Form.Item
+          name="name"
+          rules={[{ required: true, message: "Please input your Name!" }]}
+        >
+          <Input prefix={<UserOutlined />} placeholder="Full Name" />
+        </Form.Item>
+        <Form.Item
+          name="email"
+          rules={[{ required: true, message: "Please input your Email!" }]}
+        >
+          <Input prefix={<MailOutlined />} placeholder="Email" />
+        </Form.Item>
+        <Form.Item
+          name="password"
+          rules={[{ required: true, message: "Please input your Password!" }]}
+        >
+          <Input
+            prefix={<LockOutlined />}
+            type="password"
+            placeholder="Password"
+          />
+        </Form.Item>
 
-      <Form.Item>
-        <Button block type="primary" htmlType="submit" className="text-white">
-          Register now
-        </Button>
-        or <Link to="/login">Log in</Link>
-      </Form.Item>
-    </Form>
+        <Form.Item>
+          <Button block type="primary" htmlType="submit" className="text-white">
+            Register now
+          </Button>
+          or <Link to="/login">Log in!</Link>
+        </Form.Item>
+      </Form>
+    </div>
   );
 };
 

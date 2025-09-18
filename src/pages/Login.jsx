@@ -31,38 +31,40 @@ const Login = () => {
   };
 
   return (
-    <Form
-      name="login"
-      initialValues={{ remember: true }}
-      style={{ maxWidth: 360 }}
-      onFinish={onFinish}
-      className="rounded-md border p-4"
-    >
-      {error && <p className="mb-1 text-center">{error}</p>}
-      <Form.Item
-        name="email"
-        rules={[{ required: true, message: "Please input your Email!" }]}
+    <div className="h-134 content-center">
+      <Form
+        name="login"
+        initialValues={{ remember: true }}
+        style={{ maxWidth: 360 }}
+        onFinish={onFinish}
+        className="rounded-md border p-4"
       >
-        <Input prefix={<MailOutlined />} placeholder="Email" />
-      </Form.Item>
-      <Form.Item
-        name="password"
-        rules={[{ required: true, message: "Please input your Password!" }]}
-      >
-        <Input
-          prefix={<LockOutlined />}
-          type="password"
-          placeholder="Password"
-        />
-      </Form.Item>
+        {error && <p className="mb-1 text-center">{error}</p>}
+        <Form.Item
+          name="email"
+          rules={[{ required: true, message: "Please input your Email!" }]}
+        >
+          <Input prefix={<MailOutlined />} placeholder="Email" />
+        </Form.Item>
+        <Form.Item
+          name="password"
+          rules={[{ required: true, message: "Please input your Password!" }]}
+        >
+          <Input
+            prefix={<LockOutlined />}
+            type="password"
+            placeholder="Password"
+          />
+        </Form.Item>
 
-      <Form.Item>
-        <Button block type="primary" htmlType="submit" className="text-white">
-          Log in
-        </Button>
-        or <Link to="/signup">Register now!</Link>
-      </Form.Item>
-    </Form>
+        <Form.Item>
+          <Button block type="primary" htmlType="submit" className="text-white">
+            Log in
+          </Button>
+          or <Link to="/signup">Register now!</Link>
+        </Form.Item>
+      </Form>
+    </div>
   );
 };
 

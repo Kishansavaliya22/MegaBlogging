@@ -24,14 +24,14 @@ const items = [
       key: "/readblog",
     },
     {
-      label: "Edit Blog",
-      key: "/editblog",
+      label: "Add Blog",
+      key: "/addpost",
     },
   ],
 ];
 
 const AppLayout = () => {
-  const [current, setCurrent] = useState();
+  const [current, setCurrent] = useState("");
 
   const authStatus = useSelector((state) => state.authStatus);
   const dispatch = useDispatch();
@@ -63,7 +63,12 @@ const AppLayout = () => {
       >
         <div>
           <Link to="/">
-            <img src="src\assets\logo.jpg" alt="Logo" className="size-8" />
+            <img
+              src="src\assets\logo.jpg"
+              alt="Logo"
+              className="size-8 mr-5"
+              onClick={() => setCurrent("")}
+            />
           </Link>
         </div>
         <Menu
@@ -72,9 +77,13 @@ const AppLayout = () => {
           selectedKeys={[current]}
           onClick={menuHandler}
           items={!authStatus ? items[0] : items[1]}
-          style={{ flex: 1, minWidth: 0 }}
+          style={{ flex: 1, minWidth: 0, justifyContent: "end" }}
         />
-        {authStatus && <Button onClick={logoutHandler}>Logout</Button>}
+        {authStatus && (
+          <Button className="ml-5" onClick={logoutHandler}>
+            Logout
+          </Button>
+        )}
       </Header>
       <Content className="p-3 justify-items-center">
         <Outlet />

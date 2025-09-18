@@ -7,6 +7,7 @@ import { Provider } from "react-redux";
 import store from "../src/store/store.js";
 import { StyleProvider } from "@ant-design/cssinjs";
 import { ConfigProvider } from "antd";
+import "@ant-design/v5-patch-for-react-19";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <StrictMode>
